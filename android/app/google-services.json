@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "255404280562",
+    "project_id": "my-notes-practise-app",
+    "storage_bucket": "my-notes-practise-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255404280562:android:255c2cc53a09456f585e6b",
+        "android_client_info": {
+          "package_name": "com.example.learningdart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255404280562-9ehsi4s1fb57sbqgon48frt8po7f3qku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeyetYPG-4uMuZtI5MAb4FLMuegntb4kE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255404280562-9ehsi4s1fb57sbqgon48frt8po7f3qku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
