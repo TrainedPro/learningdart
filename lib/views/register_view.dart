@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:learningdart/firebase_options.dart';
-import 'dart:developer' as devtools show log;
+import 'package:learningdart/utlilites/show_error_dialog.dart';
 
 import '../constants/routes.dart';
 
@@ -69,14 +69,40 @@ class _RegisterViewState extends State<RegisterView> {
                       final email = _email.text;
                       final password = _password.text;
                       try {
-                        final userCredentials = await FirebaseAuth.instance
+                        await FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                           email: email,
                           password: password,
                         );
-                        devtools.log(userCredentials.toString());
+                        final user = FirebaseAuth.instance.currentUser;
+                        await user?.sendEmailVerification();
+                        if (context.mounted) {
+                          Navigator.of(context).pushNamed(verifyEmailRoute);
+                        }
                       } on FirebaseAuthException catch (e) {
-                        devtools.log('INFO: ${e.code}');
+                        if (e.code == 'weak-password') {
+                          await showErrorDialog(
+                            context,
+                            'Weak Password',
+                          );
+                        } else if (e.code == 'email-already-in-use') {
+                          await showErrorDialog(
+                            context,
+                            'Email Is Already In Use',
+                          );
+                        } else if (e.code == 'invalid-email') {
+                          await showErrorDialog(
+                            context,
+                            'The Email Is Invalid',
+                          );
+                        } else {
+                          await showErrorDialog(
+                            context,
+                            'Error: ${e.code}',
+                          );
+                        }
+                      } catch (e) {
+                        await showErrorDialog(context, 'External Error: $e');
                       }
                     },
                     child: const Text('Register'),
