@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -36,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,4 +53,25 @@ class DefaultFirebaseOptions {
     projectId: 'my-notes-practise-app',
     storageBucket: 'my-notes-practise-app.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDCT4pxD3e8_1iojXGK8d463DqI5szS4DY',
+    appId: '1:255404280562:web:a4e8edcbeeb8f432585e6b',
+    messagingSenderId: '255404280562',
+    projectId: 'my-notes-practise-app',
+    authDomain: 'my-notes-practise-app.firebaseapp.com',
+    storageBucket: 'my-notes-practise-app.appspot.com',
+    measurementId: 'G-X35P54D97R',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDCT4pxD3e8_1iojXGK8d463DqI5szS4DY',
+    appId: '1:255404280562:web:7674be5115315a71585e6b',
+    messagingSenderId: '255404280562',
+    projectId: 'my-notes-practise-app',
+    authDomain: 'my-notes-practise-app.firebaseapp.com',
+    storageBucket: 'my-notes-practise-app.appspot.com',
+    measurementId: 'G-8ZVZ065H2W',
+  );
+
 }
