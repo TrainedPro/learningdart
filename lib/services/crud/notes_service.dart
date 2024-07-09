@@ -27,7 +27,7 @@ class NotesService {
       final user = await getUser(email: email);
       return user;
     } on UserDoesNotExist {
-      final createdUser = createUser(email: email);
+      final createdUser = await createUser(email: email);
       return createdUser;
     } catch (e) {
       rethrow;
@@ -149,7 +149,7 @@ class NotesService {
     final results = await db.query(userTable,
         limit: 1, where: 'email = ?', whereArgs: [email.toLowerCase()]);
 
-    if (results.isNotEmpty) {
+    if (results.isEmpty) {
       throw UserDoesNotExist();
     }
 
