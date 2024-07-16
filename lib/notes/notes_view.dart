@@ -6,7 +6,6 @@ import 'package:learningdart/notes/notes_list_view.dart';
 import 'package:learningdart/services/auth/auth_service.dart';
 import 'package:learningdart/services/auth/bloc/auth_bloc.dart';
 import 'package:learningdart/services/auth/bloc/auth_event.dart';
-import 'package:learningdart/services/auth/bloc/auth_state.dart';
 import 'package:learningdart/services/cloud/cloud_note.dart';
 import 'package:learningdart/services/cloud/firebase_cloud_storage.dart';
 import 'package:learningdart/utlilites/dialogs/logout_dialog.dart';
