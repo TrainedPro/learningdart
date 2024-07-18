@@ -6,7 +6,6 @@ import 'package:learningdart/services/auth/bloc/auth_bloc.dart';
 import 'package:learningdart/services/auth/bloc/auth_event.dart';
 import 'package:learningdart/services/auth/bloc/auth_state.dart';
 import 'package:learningdart/utlilites/dialogs/error_dialog.dart';
-import '../constants/routes.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
