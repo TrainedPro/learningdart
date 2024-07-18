@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learningdart/services/auth/auth_service.dart';
-import 'package:learningdart/utlilites/dialogs/cannot_share_empty_note_dialog.dart';
-import 'package:learningdart/utlilites/generics/get_arguments.dart';
+import 'package:learningdart/utilities/dialogs/cannot_share_empty_note_dialog.dart';
+import 'package:learningdart/utilities/generics/get_arguments.dart';
 
 import 'package:learningdart/services/cloud/cloud_note.dart';
 import 'package:learningdart/services/cloud/firebase_cloud_storage.dart';
@@ -120,6 +120,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
               return TextField(
                 controller: _textController,
                 keyboardType: TextInputType.multiline,
+                textCapitalization: TextCapitalization.sentences,
                 maxLines: null,
                 decoration:
                     const InputDecoration(hintText: "Start Typing Your Note"),
