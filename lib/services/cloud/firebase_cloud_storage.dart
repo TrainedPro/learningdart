@@ -25,10 +25,10 @@ class FirebaseCloudStorage {
     }
   }
 
-  Stream<Iterable<CloudNote>> allNotes({required String ownerUserId}) =>
-      notes.snapshots().map((event) => event.docs
-          .map((doc) => CloudNote.fromSnapshot(doc))
-          .where((note) => note.ownerUserId == ownerUserId));
+  Stream<Iterable<CloudNote>> allNotes({required String ownerUserId}) => notes
+      .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
+      .snapshots()
+      .map((event) => event.docs.map((doc) => CloudNote.fromSnapshot(doc)));
 
   Future<CloudNote> createNewNote({required String ownerUserId}) async {
     final document = await notes.add({
@@ -41,19 +41,6 @@ class FirebaseCloudStorage {
       ownerUserId: ownerUserId,
       text: '',
     );
-  }
-
-  Future<Iterable<CloudNote>> getNotes({required String ownerUserId}) async {
-    try {
-      return await notes
-          .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
-          .get()
-          .then(
-            (value) => value.docs.map((doc) => CloudNote.fromSnapshot(doc)),
-          );
-    } catch (e) {
-      throw CouldNotGetAllNotesException();
-    }
   }
 
   static final FirebaseCloudStorage _shared =
