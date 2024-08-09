@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learningdart/extensions/buildcontext/loc.dart';
 import 'package:learningdart/services/auth/auth_exceptions.dart';
 import 'package:learningdart/services/auth/bloc/auth_bloc.dart';
 import 'package:learningdart/services/auth/bloc/auth_event.dart';
@@ -39,75 +40,81 @@ class _LoginViewState extends State<LoginView> {
           if (state.exception is UserNotFoundAuthException) {
             await showErrorDialog(
               context,
-              'Can Not Find User With Entered Credentials',
+              context.loc.login_error_cannot_find_user,
             );
           } else if (state.exception is WrongPasswordAuthException) {
             await showErrorDialog(
               context,
-              'Wrong Credentials',
+              context.loc.login_error_wrong_credentials,
             );
           } else if (state.exception is GenericAuthException) {
             await showErrorDialog(
               context,
-              'Generic Auth Exception',
+              context.loc.generic_error_prompt,
             );
           }
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Login'),
+          title: Text(context.loc.login),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const Text('Please Log Into Your Account To Continue'),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                autofocus: true,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Email Here',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(context.loc.login_view_prompt),
+                TextField(
+                  controller: _email,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    hintText: context.loc.email_text_field_placeholder,
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Password Here',
+                TextField(
+                  controller: _password,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    hintText: context.loc.password_text_field_placeholder,
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final email = _email.text;
-                  final password = _password.text;
-                  context.read<AuthBloc>().add(
-                        AuthEventLogIn(
-                          email,
-                          password,
-                        ),
-                      );
-                },
-                child: const Text('Login'),
-              ),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(const AuthEventForgotPassword());
-                },
-                child: const Text('I Forgot My Password!'),
-              ),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(const AuthEventShouldRegister());
-                },
-                child: const Text('Not Registered Yet? Register Here!'),
-              ),
-            ],
+                TextButton(
+                  onPressed: () async {
+                    final email = _email.text;
+                    final password = _password.text;
+                    context.read<AuthBloc>().add(
+                          AuthEventLogIn(
+                            email,
+                            password,
+                          ),
+                        );
+                  },
+                  child: Text(context.loc.login),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context
+                        .read<AuthBloc>()
+                        .add(const AuthEventForgotPassword());
+                  },
+                  child: Text(context.loc.forgot_password),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context
+                        .read<AuthBloc>()
+                        .add(const AuthEventShouldRegister());
+                  },
+                  child: Text(context.loc.login_view_not_registered_yet),
+                ),
+              ],
+            ),
           ),
         ),
       ),
